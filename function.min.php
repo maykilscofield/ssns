@@ -1,4 +1,4 @@
-<?php
+
 
 /*
  *
@@ -9,6 +9,9 @@
  * 31.01.17 / 21.47
  *
  */
+<?php
+
+
 
 session_start();
 
@@ -611,14 +614,14 @@ function hot()
     $total_records = $rs_result->rowCount();
     $total_pages   = ceil($total_records / $num_rec_per_page);
     
-    echo '<br /><a href="home?p=hot&page=1" class="m2">First</a>'; // İlk Sayfa
+    echo '<br /><a href="?p=hot&page=1" class="m2">First</a>'; // İlk Sayfa
     
     for ($i = 1; $i <= $total_pages; $i++) {
-        echo ' <a href="home?p=hot&page=' . $i . '" class="m2">' . $i . '</a> ';
+        echo ' <a href="?p=hot&page=' . $i . '" class="m2">' . $i . '</a> ';
     }
     ;
     
-    echo '<a href="home?p=hot&page=' . $total_pages . '" class="m2">Next</a>'; // Sonraki Sayfa
+    echo '<a href="?p=hot&page=' . $total_pages . '" class="m2">Next</a>'; // Sonraki Sayfa
 }
 
 function week()
@@ -668,14 +671,14 @@ function week()
     $total_records = $rs_result->rowCount();
     $total_pages   = ceil($total_records / $num_rec_per_page);
     
-    echo '<br /><a href="home?p=hot&page=1" class="m2">First</a>'; // İlk Sayfa
+    echo '<br /><a href="?p=hot&page=1" class="m2">First</a>'; // İlk Sayfa
     
     for ($i = 1; $i <= $total_pages; $i++) {
-        echo ' <a href="home?p=hot&page=' . $i . '" class="m2">' . $i . '</a> ';
+        echo ' <a href="?p=hot&page=' . $i . '" class="m2">' . $i . '</a> ';
     }
     ;
     
-    echo '<a href="home?p=hot&page=' . $total_pages . '" class="m2">Next</a>'; // Sonraki Sayfa
+    echo '<a href="?p=hot&page=' . $total_pages . '" class="m2">Next</a>'; // Sonraki Sayfa
 }
 
 function month()
@@ -725,14 +728,14 @@ function month()
     $total_records = $rs_result->rowCount();
     $total_pages   = ceil($total_records / $num_rec_per_page);
     
-    echo '<br /><a href="home?p=hot&page=1" class="m2">First</a>'; // İlk Sayfa
+    echo '<br /><a href="?p=hot&page=1" class="m2">First</a>'; // İlk Sayfa
     
     for ($i = 1; $i <= $total_pages; $i++) {
-        echo ' <a href="home?p=hot&page=' . $i . '" class="m2">' . $i . '</a> ';
+        echo ' <a href="?p=hot&page=' . $i . '" class="m2">' . $i . '</a> ';
     }
     ;
     
-    echo '<a href="home?p=hot&page=' . $total_pages . '" class="m2">Next</a>'; // Sonraki Sayfa
+    echo '<a href="?p=hot&page=' . $total_pages . '" class="m2">Next</a>'; // Sonraki Sayfa
 }
 
 function home_today()
@@ -861,10 +864,14 @@ function home_month()
     }
 }
 
+
+/*
 $dosya = file_get_contents('footer.php'); 
-if( !preg_match('#<p class="text-center">A product by <a href="">Uğur KILCI</a>.</p>#' , $dosya) ){ 
-    exit("Lütfen footer da değişiklik yapmayın veya kaldırmayın. Linki kaldırmak için ulaşın: ugurbocugu8@gmail.com"); 
+if( !preg_match('#<p class="text-center"> <a href=""></a>.</p>#' , $dosya) ){ 
+    exit("Lütfen footer da değişiklik yapmayın veya kaldırmayın. "); 
 }
+
+*/
 
 function replace_tr($text)
 // seo link yapısı
@@ -925,15 +932,21 @@ function add()
             if ($kod = $securitycode) {
                 $baslikac = $db->prepare("INSERT INTO basliklar set baslik_baslik=?, baslik_baslik_replace=?, baslik_aciklama=?, baslik_sahip=?, baslik_tarih=?");
                 $baslikac->execute(array(
-                    $title,
-                    $replace,
-                    $content,
-                    $sahip,
-                    $tarih
+                        $title,
+                        $replace,
+                        $content,
+                        $sahip,
+                        $tarih
                 ));
-                
+      
+
                 if ($baslikac) { // başarıyla eklendi
-                    echo "Success :)<br />";
+                    echo "Post başarıyla eklendi :)<br />";
+
+
+  
+
+
                 } else { // hata var!
                     echo "Error :(<br />";
                 }
@@ -943,4 +956,5 @@ function add()
         }
     }
 }
+
 ?>
